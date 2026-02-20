@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ramzan Family</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: linear-gradient(#0f2027,#203a43,#2c5364);
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+h1{margin-top:20px;}
+
+.section{
+    background: rgba(255,255,255,0.1);
+    padding:20px;
+    border-radius:15px;
+    margin:25px 0;
+}
+
+
+
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:10px;
+    background:#ffd369;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.result{
+    margin-top:15px;
+    font-size:18px;
+    min-height:40px;
+}
+
+.dontContainer{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    margin-top:15px;
+    flex-wrap:wrap;
+}
+.hadithResult{
+    font-size:20px;
+    line-height:1.6;
+    font-style:italic;
+}
+
+/* ===== RAMZAN JOURNAL STYLE ===== */
+
+#journal{
+  max-width: 700px;
+  margin: 25px auto;
+  padding: 10px;
+}
+
+.dayEntry{
+  background: linear-gradient(135deg,#fffef8,#f3f7f2);
+  padding:18px 18px 20px 18px;
+  margin:18px 0;
+  border-radius:16px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.12);
+  border:1px solid #e6e6e6;
+  transition:transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* hover effect (works on laptop) */
+.dayEntry:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 22px rgba(0,0,0,0.18);
+}
+
+.dayEntry h3{
+  margin:0 0 8px 0;
+  color:#1f7a63;
+  font-size:22px;
+}
+
+.dayEntry p{
+  margin:0;
+  font-size:17px;
+  line-height:1.7;
+  color:#333;
+}
+
+/* Ramzan heading */
+#journalTitle{
+  text-align:center;
+  font-size:28px;
+  margin-top:30px;
+  color:#145c4a;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+<h1>🌙 Ramzan Mubarak Family</h1>
+
+<div class="section">
+<h2>Allah's Beautiful Names</h2>
+<button onclick="randomName()">Generate</button>
+<div id="nameResult" class="result"></div>
+</div>
+
+<div class="section">
+<h2>Hadith Reminder</h2>
+<button onclick="randomHadith()">Show Hadith</button>
+<div id="hadithResult" class="result"></div>
+</div>
+
+
+
+<div class="section">
+<h2>Don'ts in Islam</h2>
+<button onclick="randomDont()">Remind Me</button>
+
+<div class="dontContainer">
+
+    <div id="dontResult" class="result"></div>
+
+    <video id="memeVideo" width="220" style="display:none;" controls>
+        <source src="eeee.mp4" type="video/mp4">
+    </video>
+
+</div>
+</div>
+
+<h2>🌙 Ramzan Project</h2>
+
+<div id="journal">
+  
+  <div class="dayEntry">
+    <h3>Day 2</h3>
+    <p>
+      The three things i learned from day-2 are:
+
+      
+      (1.) No matter how dedicated we are, if we lack a proper plan and execution,
+           our efforts go in vain, and failure becomes inevitable.
+
+      (2.) Words can be deceiving, and one might get motivated, but if there is a lack of discipline, 
+          then going astray from the right path is definite.
+
+      (3.) In a team or coalition, when everybody plays for themselves, 
+          cracks start to appear in the formation, which leads to the defeat or annihilation of the whole group.
+    </p>
+  </div>
+
+  
+
+  <div class="dayEntry">
+    <h3>Day 1</h3>
+    <p>
+      The three things i learned from day-1 are:
+
+      (1.) People have used false allegations to create sects in Islam and divide the Muslim Ummah. 
+         which eventually led to infighting and civil wars in the muslim world.
+
+
+      (2.) Islam has been struck by many calamities in the past, but it has always bounced back from the darkest hours,
+         and proved the patience and resilience of the muslim ummah.
+ 
+       (3.) Knowledge is the most prominent factor in being successful, whether it is in the matter of deen or duniya.
+      
+    </p>
+  </div>
+
+
+  
+
+
+<script>
+
+  let currentDay = 1;
+
+const names = [
+["Ar-Rahman","The Most Merciful"],
+["Ar-Rahim","The Most Compassionate"],
+["Al-Malik","The King"],
+["Al-Quddus","The Most Holy"],
+["As-Salam","The Source of Peace"],
+["Al-Mu'min","Giver of Faith and Security"],
+["Al-Muhaymin","The Guardian"],
+["Al-Aziz","The Almighty"],
+["Al-Jabbar","The Compeller"],
+["Al-Mutakabbir","The Supreme"],
+
+["Al-Khaliq","The Creator"],
+["Al-Bari","The Maker"],
+["Al-Musawwir","The Fashioner"],
+["Al-Ghaffar","The Constant Forgiver"],
+["Al-Qahhar","The All-Dominant"],
+["Al-Wahhab","The Bestower"],
+["Ar-Razzaq","The Provider"],
+["Al-Fattah","The Opener"],
+["Al-Alim","The All-Knowing"],
+["Al-Qabid","The Withholder"],
+
+["Al-Basit","The Extender"],
+["Al-Khafid","The Reducer"],
+["Ar-Rafi","The Exalter"],
+["Al-Muizz","The Honourer"],
+["Al-Muzill","The Humiliator"],
+["As-Sami","The All-Hearing"],
+["Al-Basir","The All-Seeing"],
+["Al-Hakam","The Judge"],
+["Al-Adl","The Just"],
+["Al-Latif","The Gentle"],
+
+["Al-Khabir","The All-Aware"],
+["Al-Halim","The Forbearing"],
+["Al-Azim","The Magnificent"],
+["Al-Ghafur","The Great Forgiver"],
+["Ash-Shakur","The Appreciative"],
+["Al-Ali","The Most High"],
+["Al-Kabir","The Most Great"],
+["Al-Hafiz","The Preserver"],
+["Al-Muqit","The Sustainer"],
+["Al-Hasib","The Reckoner"],
+
+["Al-Jalil","The Majestic"],
+["Al-Karim","The Generous"],
+["Ar-Raqib","The Watchful"],
+["Al-Mujib","The Responsive"],
+["Al-Wasi","The All-Encompassing"],
+["Al-Hakim","The All-Wise"],
+["Al-Wadud","The Most Loving"],
+["Al-Majid","The Most Glorious"],
+["Al-Baith","The Resurrector"],
+["Ash-Shahid","The Witness"],
+
+["Al-Haqq","The Truth"],
+["Al-Wakil","The Trustee"],
+["Al-Qawi","The Most Strong"],
+["Al-Matin","The Firm"],
+["Al-Wali","The Protecting Friend"],
+["Al-Hamid","The Praiseworthy"],
+["Al-Muhsi","The Accounter"],
+["Al-Mubdi","The Originator"],
+["Al-Muid","The Restorer"],
+["Al-Muhyi","The Giver of Life"],
+
+["Al-Mumit","The Bringer of Death"],
+["Al-Hayy","The Ever-Living"],
+["Al-Qayyum","The Self-Subsisting"],
+["Al-Wajid","The Finder"],
+["Al-Majid","The Noble"],
+["Al-Wahid","The One"],
+["As-Samad","The Eternal Refuge"],
+["Al-Qadir","The All-Powerful"],
+["Al-Muqtadir","The Determiner"],
+["Al-Muqaddim","The Expediter"],
+
+["Al-Muakhkhir","The Delayer"],
+["Al-Awwal","The First"],
+["Al-Akhir","The Last"],
+["Az-Zahir","The Manifest"],
+["Al-Batin","The Hidden"],
+["Al-Wali","The Governor"],
+["Al-Mutaali","The Most Exalted"],
+["Al-Barr","The Source of Goodness"],
+["At-Tawwab","The Accepter of Repentance"],
+["Al-Muntaqim","The Avenger"],
+
+["Al-Afuw","The Pardoner"],
+["Ar-Rauf","The Most Kind"],
+["Malik-ul-Mulk","Owner of All Sovereignty"],
+["Dhul-Jalali-wal-Ikram","Lord of Majesty and Honour"],
+["Al-Muqsit","The Just One"],
+["Al-Jami","The Gatherer"],
+["Al-Ghani","The Self-Sufficient"],
+["Al-Mughni","The Enricher"],
+["Al-Mani","The Preventer"],
+["Ad-Darr","The Creator of Harm"],
+
+["An-Nafi","The Creator of Good"],
+["An-Nur","The Light"],
+["Al-Hadi","The Guide"],
+["Al-Badi","The Incomparable Originator"],
+["Al-Baqi","The Everlasting"],
+["Al-Warith","The Inheritor"],
+["Ar-Rashid","The Guide to the Right Path"],
+["As-Sabur","The Most Patient"]
+];
+
+function randomName(){
+let n = names[Math.floor(Math.random()*names.length)];
+document.getElementById("nameResult").innerHTML =
+"<b>"+n[0]+"</b><br>"+n[1];
+}
+
+const hadiths = [
+["The strong person is not the one who throws others down, but the one who controls himself when angry.","Prophet Muhammad ﷺ (Bukhari & Muslim)"],
+["Allah does not look at your appearance or wealth, but looks at your hearts and actions.","Prophet Muhammad ﷺ (Muslim)"],
+["Make things easy and do not make them difficult, give glad tidings and do not repel people.","Prophet Muhammad ﷺ (Bukhari)"],
+["The best among you are those who have the best manners and character.","Prophet Muhammad ﷺ (Bukhari)"],
+["He who does not show mercy will not be shown mercy.","Prophet Muhammad ﷺ (Bukhari & Muslim)"],
+["A good word is charity.","Prophet Muhammad ﷺ (Bukhari & Muslim)"],
+["Smiling in the face of your brother is charity.","Prophet Muhammad ﷺ (Tirmidhi)"],
+["None of you truly believes until he loves for his brother what he loves for himself.","Prophet Muhammad ﷺ (Bukhari & Muslim)"],
+["The most beloved deeds to Allah are those that are consistent, even if small.","Prophet Muhammad ﷺ (Bukhari)"],
+["Whoever believes in Allah and the Last Day should speak good or remain silent.","Prophet Muhammad ﷺ (Bukhari & Muslim)"],
+
+["The merciful are shown mercy by The Most Merciful. Be merciful to those on earth.","Prophet Muhammad ﷺ (Tirmidhi)"],
+["Cleanliness is half of faith.","Prophet Muhammad ﷺ (Muslim)"],
+["The world is a prison for the believer and paradise for the disbeliever.","Prophet Muhammad ﷺ (Muslim)"],
+["Seek knowledge from the cradle to the grave.","Prophet Muhammad ﷺ (Bayhaqi)"],
+["The best charity is that given in Ramadan.","Prophet Muhammad ﷺ (Tirmidhi)"],
+["Feed the hungry, visit the sick, and free the captive.","Prophet Muhammad ﷺ (Bukhari)"],
+["The best of people are those who are most beneficial to others.","Prophet Muhammad ﷺ (Tabarani)"],
+["Part of someone's good Islam is leaving what does not concern him.","Prophet Muhammad ﷺ (Tirmidhi)"],
+["The dua of a Muslim for his brother in his absence is answered.","Prophet Muhammad ﷺ (Muslim)"],
+["Modesty is part of faith.","Prophet Muhammad ﷺ (Bukhari & Muslim)"],
+
+["When a person dies, his deeds end except three: ongoing charity, beneficial knowledge, or a righteous child who prays for him.","Prophet Muhammad ﷺ (Muslim)"],
+["Exchange gifts and you will love one another.","Prophet Muhammad ﷺ (Bukhari - Adab Al Mufrad)"],
+["The best house is the house in which an orphan is treated well.","Prophet Muhammad ﷺ (Ibn Majah)"],
+["Do not waste water even if you are at a flowing river.","Prophet Muhammad ﷺ (Ibn Majah)"],
+["Richness is not having many possessions, but richness is richness of the soul.","Prophet Muhammad ﷺ (Bukhari & Muslim)"],
+["The believer is not one who eats his fill while his neighbor is hungry.","Prophet Muhammad ﷺ (Baihaqi)"],
+["Gentleness is not in anything except that it beautifies it.","Prophet Muhammad ﷺ (Muslim)"],
+["Beware of suspicion, for suspicion is the worst of false tales.","Prophet Muhammad ﷺ (Bukhari & Muslim)"],
+["Whoever removes a hardship of a believer, Allah will remove a hardship from him on the Day of Judgment.","Prophet Muhammad ﷺ (Muslim)"],
+["The best jihad is speaking a word of truth to a tyrant ruler.","Prophet Muhammad ﷺ (Abu Dawud)"]
+];
+
+
+function randomHadith(){
+
+let h = hadiths[Math.floor(Math.random()*hadiths.length)];
+
+let formatted = h[0] + "<br><br><i>— " + h[1] + "</i>";
+
+document.getElementById("hadithResult").innerHTML = formatted;
+
+localStorage.setItem("hadith", formatted);
+}
+
+const donts = [
+["Do not lie even while joking.","Prophet Muhammad ﷺ (Tirmidhi)"],
+["Do not backbite one another.","Qur'an 49:12"],
+["Do not spy on people.","Qur'an 49:12"],
+["Do not waste water even at a flowing river.","Hadith (Ibn Majah)"],
+["Do not be arrogant.","Qur'an 31:18"],
+["Do not walk on earth with pride.","Qur'an 17:37"],
+["Do not insult others' beliefs.","Qur'an 6:108"],
+["Do not break promises.","Qur'an 16:91"],
+["Do not betray trusts.","Qur'an 8:27"],
+["Do not spread rumors without verification.","Qur'an 49:6"],
+
+["Do not harm your neighbor.","Hadith (Bukhari & Muslim)"],
+["Do not be jealous.","Hadith (Abu Dawud)"],
+["Do not be wasteful; Allah does not love wasteful people.","Qur'an 7:31"],
+["Do not delay prayers intentionally.","Hadith"],
+["Do not mock others.","Qur'an 49:11"],
+["Do not call each other offensive nicknames.","Qur'an 49:11"],
+["Do not cheat in trade.","Hadith (Muslim)"],
+["Do not consume interest (riba).","Qur'an 2:275"],
+["Do not oppress anyone.","Hadith Qudsi"],
+["Do not despair of Allah's mercy.","Qur'an 39:53"],
+
+["Do not follow suspicion.","Qur'an 49:12"],
+["Do not look at what others have with envy.","Hadith (Muslim)"],
+["Do not sever family ties.","Hadith (Bukhari & Muslim)"],
+["Do not be rude to parents.","Qur'an 17:23"],
+["Do not raise your voice over others in anger.","Hadith"],
+["Do not waste food.","Hadith"],
+["Do not curse.","Hadith (Tirmidhi)"],
+["Do not argue excessively.","Hadith (Tirmidhi)"],
+["Do not show off good deeds.","Hadith (Muslim)"],
+["Do not remind others of favors you gave.","Qur'an 2:264"]
+];
+
+function randomDont(){
+let d = donts[Math.floor(Math.random()*donts.length)];
+document.getElementById("dontResult").innerHTML = d;
+
+let video = document.getElementById("memeVideo");
+video.style.display = "block";
+video.currentTime = 0;
+video.play();
+}
+
+
+
+</script>
+
+
+</body>
+</html>
